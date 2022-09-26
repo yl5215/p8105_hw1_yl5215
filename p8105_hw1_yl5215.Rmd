@@ -1,0 +1,49 @@
+---
+title: "p8105_hw1_YOURUNI.Rmd"
+output: html_document
+---
+
+```{R}
+library(tidyverse)
+library(tidyr)
+```
+
+# p8105 HW1 yl5215
+
+The following code loads the `penguins` dataset:
+
+```{R}
+data("penguins", package = "palmerpenguins")
+```
+
+The following code omits missing values in `penguins` and extrats `species`,  `flipper_length_mm`, and `island` from `penguins`.
+
+```{R}
+penguins = drop_na(penguins)
+flipper_length_mm = pull(penguins, flipper_length_mm)
+species = pull(penguins, species)
+island = pull(penguins, island)
+```
+
+The `penguins` dataset descibes properties of `r levels(species)` living in `r levels(island)`. It includes `r nrow(penguins)` rows and `r ncol(penguins)` columns, and it contains variables `r variable.names(penguins)`.
+
+The following code computes the mean of `flipper_length_mm`.
+
+```{R}
+mean(flipper_length_mm)
+```
+
+So the mean of flipper length is `r mean(flipper_length_mm)`.
+
+The following code draws a scatterplot of `flipper_length_mm` (y) vs `bill_length_mm` (x).
+
+```{R}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+```
+
+The following code saves the plot above to `scatter_plot.pdf`.
+
+```{R}
+ggsave ("scatter_plot.pdf", height = 4, width = 6)
+```
+
