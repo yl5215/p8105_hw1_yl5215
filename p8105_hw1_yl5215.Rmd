@@ -1,6 +1,6 @@
 ---
 title: "p8105_hw1_YOURUNI.Rmd"
-output: html_document
+output: github_document
 ---
 
 ```{R}
@@ -9,6 +9,8 @@ library(tidyr)
 ```
 
 # p8105 HW1 yl5215
+
+## Probelm 1
 
 The following code loads the `penguins` dataset:
 
@@ -35,7 +37,7 @@ mean(flipper_length_mm)
 
 So the mean of flipper length is `r mean(flipper_length_mm)`.
 
-The following code draws a scatterplot of `flipper_length_mm` (y) vs `bill_length_mm` (x).
+The following code draws a scatter plot of `flipper_length_mm` (y) vs `bill_length_mm` (x).
 
 ```{R}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
@@ -47,3 +49,42 @@ The following code saves the plot above to `scatter_plot.pdf`.
 ggsave ("scatter_plot.pdf", height = 4, width = 6)
 ```
 
+## Problem 2
+
+The following code defines the data frame `my_df`.
+
+```{R}
+my_df = tibble(
+  vec_numeric = rnorm(10),
+  vec_logical = vec_numeric > 0,
+  vec_char = c("one", "two", "three", "four", "five", "six", "seven", "eight", "night", "ten"),
+  vec_factor = factor(c("A", "B", "C", "A", "B", "C", "A", "B", "C", "A"))
+)
+```
+
+The following code extracts the variables in `my_df`.
+
+```{R}
+vec_numeric = pull(my_df, vec_numeric)
+vec_logical = pull(my_df, vec_logical)
+vec_char = pull(my_df, vec_char)
+vec_factor = pull(my_df, vec_factor)
+```
+
+The means of `vec_numeric`, `vec_logical`, `vec_char`, and `vec_factor` are `r mean(vec_numeric)`, `r mean(vec_logical)`, `r mean(vec_char)`, and `r mean(vec_factor)`. Apparently, taking the mean of `vec_char` and `vec_factor` does not work.
+
+The following code converts `vec_logical`, `vec_char`, and `vec_factor` to numeric values and then compute their respective means.
+
+```{R}
+as.numeric(vec_logical)
+as.numeric(vec_char)
+as.numeric(vec_factor)
+mean(as.numeric(vec_logical))
+mean(as.numeric(vec_char))
+mean(as.numeric(vec_factor))
+```
+Apparently, `vec_char` cannot be converted to numeric values. It is probably because the character variable is just text, and therefore it cannot be meaningfully converted to numeric values.
+
+It seems that when the mean of `vec_logical` is computed, `TRUE`s are treated as 1, and `FALSE`s are treated as 0, so the mean `vec_logical` can be computed.
+
+The mean of `vec_factor` can be computed after converting `vec_factor` to numeric values by the function `as.numeric`, but the mean of `vec_char` cannot be computed either way because the character variable is just text.
