@@ -10,7 +10,7 @@ library(tidyr)
 
 # p8105 HW1 yl5215
 
-## Probelm 1
+## Problem 1
 
 The following code loads the `penguins` dataset:
 
@@ -18,7 +18,7 @@ The following code loads the `penguins` dataset:
 data("penguins", package = "palmerpenguins")
 ```
 
-The following code omits missing values in `penguins` and extrats `species`,  `flipper_length_mm`, and `island` from `penguins`.
+The following code omits missing values in `penguins` and extracts `species`,  `flipper_length_mm`, and `island` from `penguins`.
 
 ```{R}
 penguins = drop_na(penguins)
@@ -27,7 +27,7 @@ species = pull(penguins, species)
 island = pull(penguins, island)
 ```
 
-The `penguins` dataset descibes properties of `r levels(species)` living in `r levels(island)`. It includes `r nrow(penguins)` rows and `r ncol(penguins)` columns, and it contains variables `r variable.names(penguins)`.
+The `penguins` dataset describes properties of `r levels(species)` living in `r levels(island)`. It includes `r nrow(penguins)` rows and `r ncol(penguins)` columns, and it contains variables `r variable.names(penguins)`.
 
 The following code computes the mean of `flipper_length_mm`.
 
